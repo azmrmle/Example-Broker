@@ -111,18 +111,14 @@ onexecute = async function ({
                 var resultStatus = "FAILED";
 
                 if (status >= 200 && status < 300) {
-                    var response = xhr.response;
+    var lengthHeader = xhr.getResponseHeader(
+        "Content-Length"
+    );
 
-                    if (response &&
-                        typeof response.byteLength === "number") {
-                        count = response.byteLength;
-                        resultStatus = "SUCCESS";
-                        message = "Binary response received";
-                    } else {
-                        message =
-                            "Binary ArrayBuffer response unavailable";
-                    }
-                } else {
+    count = lengthHeader ? Number(lengthHeader) : 0;
+    resultStatus = "SUCCESS";
+    message = "Document URL is accessible";
+} else {
                     message = "HTTP request failed: " + status;
                 }
 
