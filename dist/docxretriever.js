@@ -150,9 +150,8 @@ onexecute = async function ({
         };
 
         try {
-            xhr.open("GET", url, true);
+            xhr.open("HEAD", url, true);
             xhr.timeout = 30000;
-            xhr.responseType = "arraybuffer";
             xhr.send();
         } catch (err) {
             reject(err);
